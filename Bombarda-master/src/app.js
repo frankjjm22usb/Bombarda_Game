@@ -134,14 +134,108 @@ function initScene() {
 
     //Piso
     //Materiales
-    var material = new THREE.MeshPhongMaterial({ color: 0x8A0000, wireframe: false, map: THREE.ImageUtils.loadTexture('assets/textures/Base.jpg') });
+    var material = new THREE.MeshPhongMaterial({ wireframe: false, map: THREE.ImageUtils.loadTexture('assets/textures/Base.jpg')});
     // material.map.wrapS = THREE.MirroredRepeatWrapping;
     // material.map.wrapT = THREE.MirroredRepeatWrapping;
     // material.map.repeat.set(3, 3);
 
     var geometria = new THREE.BoxGeometry(3000, 400, 3000);
-    var UV = {
-        bricks: [
+    var UV1 = {
+        GrandV: [
+            new THREE.Vector2(0.0,1.0),
+            new THREE.Vector2(0.0,0.0),
+            new THREE.Vector2(0.4,0.0),
+            new THREE.Vector2(0.4,1.0)
+
+        ],
+
+        Azul: [
+            new THREE.Vector2(0.5,1.0),
+            new THREE.Vector2(0.5,0.0),
+            new THREE.Vector2(1.0,0.0),
+            new THREE.Vector2(1.0,1.0)
+
+        ],
+       
+    }
+
+    //Mapeo de las texturas sobre las caras
+    
+	geometria.faceVertexUvs[0] = [];
+	geometria.faceVertexUvs[0][0] = [
+		UV1.GrandV[0],
+		UV1.GrandV[1],
+		UV1.GrandV[3]
+	];
+	geometria.faceVertexUvs[0][1] = [
+		UV1.GrandV[1],
+		UV1.GrandV[2],
+		UV1.GrandV[3]
+    ];
+    geometria.faceVertexUvs[0][2] = [
+		UV1.GrandV[0],
+		UV1.GrandV[1],
+		UV1.GrandV[3]
+	];
+	geometria.faceVertexUvs[0][3] = [
+		UV1.GrandV[1],
+		UV1.GrandV[2],
+		UV1.GrandV[3]
+	];
+
+    geometria.faceVertexUvs[0][4] = [
+		UV1.Azul[0],
+		UV1.Azul[1],
+		UV1.Azul[3]
+	];
+	geometria.faceVertexUvs[0][5] = [
+		UV1.Azul[1],
+		UV1.Azul[2],
+		UV1.Azul[3]
+    ];
+    geometria.faceVertexUvs[0][6] = [
+		UV1.GrandV[0],
+		UV1.GrandV[1],
+		UV1.GrandV[3]
+	];
+	geometria.faceVertexUvs[0][7] = [
+		UV1.GrandV[1],
+		UV1.GrandV[2],
+		UV1.GrandV[3]
+    ];
+    geometria.faceVertexUvs[0][8] = [
+		UV1.GrandV[0],
+		UV1.GrandV[1],
+		UV1.GrandV[3]
+	];
+	geometria.faceVertexUvs[0][9] = [
+		UV1.GrandV[1],
+		UV1.GrandV[2],
+		UV1.GrandV[3]
+    ];
+    geometria.faceVertexUvs[0][10] = [
+		UV1.GrandV[0],
+		UV1.GrandV[1],
+		UV1.GrandV[3]
+	];
+	geometria.faceVertexUvs[0][11] = [
+		UV1.GrandV[1],
+		UV1.GrandV[2],
+		UV1.GrandV[3]
+    ];
+
+    plane = new THREE.Mesh(geometria, material);
+    plane.position.y = -200;
+    plane.receiveShadow = true;
+    scene.add(plane);
+    collidableList.push(plane);
+    
+
+    // borde izquierdo
+    var mtlBordes = new THREE.MeshPhongMaterial({ map: THREE.ImageUtils.loadTexture('assets/textures/Laterales.jpg') })
+    var geoBordes = new THREE.BoxGeometry(50, 50, 3000);
+    var UV2 = {
+        BI: [
             new THREE.Vector2(0.0,1.0),
             new THREE.Vector2(0.0,0.0),
             new THREE.Vector2(1.0,0.0),
@@ -152,27 +246,68 @@ function initScene() {
     }
 
     //Mapeo de las texturas sobre las caras
-	geometria.faceVertexUvs[0] = [];
-	geometria.faceVertexUvs[0][0] = [
-		UV.bricks[0],
-		UV.bricks[1],
-		UV.bricks[3]
+	geoBordes.faceVertexUvs[0] = [];
+	geoBordes.faceVertexUvs[0][0] = [
+		UV2.BI[0],
+        UV2.BI[1],
+		UV2.BI[3]
 	];
-	geometria.faceVertexUvs[0][1] = [
-		UV.bricks[1],
-		UV.bricks[2],
-		UV.bricks[3]
+	geoBordes.faceVertexUvs[0][1] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
+    ];
+    geoBordes.faceVertexUvs[0][2] = [
+		UV2.BI[0],
+		UV2.BI[1],
+		UV2.BI[3]
+	];
+	geoBordes.faceVertexUvs[0][3] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
 	];
 
-    plane = new THREE.Mesh(geometria, material);
-    plane.position.y = -200;
-    plane.receiveShadow = true;
-    scene.add(plane);
-    collidableList.push(plane);
-
-    // borde izquierdo
-    var mtlBordes = new THREE.MeshPhongMaterial({ color: 0XDAA520 })
-    var geoBordes = new THREE.BoxGeometry(50, 50, 3000);
+    geoBordes.faceVertexUvs[0][4] = [
+		UV2.BI[0],
+		UV2.BI[1],
+		UV2.BI[3]
+	];
+	geoBordes.faceVertexUvs[0][5] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
+    ];
+    geoBordes.faceVertexUvs[0][6] = [
+		UV2.BI[0],
+		UV2.BI[1],
+		UV2.BI[3]
+	];
+	geoBordes.faceVertexUvs[0][7] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
+    ];
+    geoBordes.faceVertexUvs[0][8] = [
+		UV2.BI[0],
+		UV2.BI[1],
+		UV2.BI[3]
+	];
+	geoBordes.faceVertexUvs[0][9] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
+    ];
+    geoBordes.faceVertexUvs[0][10] = [
+		UV2.BI[0],
+		UV2.BI[1],
+		UV2.BI[3]
+	];
+	geoBordes.faceVertexUvs[0][11] = [
+		UV2.BI[1],
+		UV2.BI[2],
+		UV2.BI[3]
+    ];
     var bordes = new THREE.Mesh(geoBordes, mtlBordes);
     bordes.position.x = -1475;
     bordes.position.y = 25;
@@ -186,8 +321,82 @@ function initScene() {
     scene.add(bordeDer);
 
     // borde front
-    var mtlBordesFB = new THREE.MeshPhongMaterial({ color: 0XDAA520 })
+    var mtlBordesFB = new THREE.MeshPhongMaterial({ map: THREE.ImageUtils.loadTexture('assets/textures/Laterales.jpg') })
     var geoBordesFB = new THREE.BoxGeometry(2900, 50, 50);
+    var UV3 = {
+        BF: [
+            new THREE.Vector2(0.0,1.0),
+            new THREE.Vector2(0.0,0.0),
+            new THREE.Vector2(1.0,0.0),
+            new THREE.Vector2(1.0,1.0)
+
+        ],
+       
+    }
+
+    //Mapeo de las texturas sobre las caras
+	geoBordesFB.faceVertexUvs[0] = [];
+	geoBordesFB.faceVertexUvs[0][0] = [
+		UV3.BF[0],
+        UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][1] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+    ];
+    geoBordesFB.faceVertexUvs[0][2] = [
+		UV3.BF[0],
+		UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][3] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+	];
+
+    geoBordesFB.faceVertexUvs[0][4] = [
+		UV3.BF[0],
+		UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][5] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+    ];
+    geoBordesFB.faceVertexUvs[0][6] = [
+		UV3.BF[0],
+		UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][7] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+    ];
+    geoBordesFB.faceVertexUvs[0][8] = [
+		UV3.BF[0],
+		UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][9] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+    ];
+    geoBordesFB.faceVertexUvs[0][10] = [
+		UV3.BF[0],
+		UV3.BF[1],
+		UV3.BF[3]
+	];
+	geoBordesFB.faceVertexUvs[0][11] = [
+		UV3.BF[1],
+		UV3.BF[2],
+		UV3.BF[3]
+    ];
     var bordesFB = new THREE.Mesh(geoBordesFB, mtlBordesFB);
     bordesFB.position.z = 1475;
     bordesFB.position.y = 25;
@@ -253,7 +462,7 @@ function initScene() {
         [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -261,8 +470,8 @@ function initScene() {
         [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
         [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]
     ]
-
-    console.log(bloques);
+    
+   console.log(bloques);
     var inicioX = -1425;
     var inicioZ = -1425;
     for (var i = 0; i < bloques.length; i++) {
@@ -271,7 +480,7 @@ function initScene() {
                 case 1:
                     var block = new THREE.Mesh(
                         new THREE.BoxGeometry(50, 50, 50),
-                        new THREE.MeshPhongMaterial({ color: 0xfffce8, wireframe: false})
+                        new THREE.MeshPhongMaterial({wireframe: false, map: THREE.ImageUtils.loadTexture('assets/textures/rocks.jpg')})
                     );
                     block.castShadow = true;
                     block.receiveShadow = true;
@@ -290,16 +499,105 @@ function initScene() {
         inicioX = -1425;
         inicioZ += 50;
     }
-
+ 
 
 
     //Plataforma central
-   var matPlatform = new THREE.MeshPhongMaterial({ color: 0xffeaa7, wireframe: false, });
+   var matPlatform = new THREE.MeshPhongMaterial({ wireframe: false, map: THREE.ImageUtils.loadTexture('assets/textures/Plata.jpg') });
     // Aldea.map.wrapS = THREE.MirroredRepeatWrapping;
     // Aldea.map.wrapT = THREE.MirroredRepeatWrapping;
     // Aldea.map.repeat.set(3, 3);
 
-    var geometriaPlatform = new THREE.BoxGeometry(1500, 200, 1500, 10, 10);
+    var geometriaPlatform = new THREE.BoxGeometry(1500, 200, 1500);
+    var UV4 = {
+        Plat2: [
+            new THREE.Vector2(0.0,1.0),
+            new THREE.Vector2(0.0,0.0),
+            new THREE.Vector2(0.4,0.0),
+            new THREE.Vector2(0.4,1.0)
+
+        ],
+
+        Plat3: [
+            new THREE.Vector2(0.5,1.0),
+            new THREE.Vector2(0.5,0.0),
+            new THREE.Vector2(1.0,0.0),
+            new THREE.Vector2(1.0,1.0)
+
+        ],
+       
+    }
+
+    //Mapeo de las texturas sobre las caras
+    
+	geometriaPlatform.faceVertexUvs[0] = [];
+	geometriaPlatform.faceVertexUvs[0][4] = [
+		UV4.Plat3[0],
+		UV4.Plat3[1],
+		UV4.Plat3[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][5] = [
+		UV4.Plat3[1],
+		UV4.Plat3[2],
+		UV4.Plat3[3]
+    ];
+    geometriaPlatform.faceVertexUvs[0][0] = [
+		UV4.Plat2[0],
+		UV4.Plat2[1],
+		UV4.Plat2[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][1] = [
+		UV4.Plat2[1],
+		UV4.Plat2[2],
+		UV4.Plat2[3]
+    ];
+
+    geometriaPlatform.faceVertexUvs[0][2] = [
+		UV4.Plat2[0],
+		UV4.Plat2[1],
+		UV4.Plat2[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][3] = [
+		UV4.Plat2[1],
+		UV4.Plat2[2],
+		UV4.Plat2[3]
+    ];
+
+    geometriaPlatform.faceVertexUvs[0][6] = [
+		UV4.Plat2[0],
+		UV4.Plat2[1],
+		UV4.Plat2[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][7] = [
+		UV4.Plat2[1],
+		UV4.Plat2[2],
+		UV4.Plat2[3]
+    ];
+
+    geometriaPlatform.faceVertexUvs[0][8] = [
+		UV4.Plat2[0],
+		UV4.Plat2[1],
+		UV4.Plat2[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][9] = [
+		UV4.Plat2[1],
+		UV4.Plat2[2],
+		UV4.Plat2[3]
+    ];
+
+    geometriaPlatform.faceVertexUvs[0][10] = [
+		UV4.Plat2[0],
+		UV4.Plat2[1],
+		UV4.Plat2[3]
+	];
+	geometriaPlatform.faceVertexUvs[0][11] = [
+		UV4.Plat2[1],
+		UV4.Plat2[2],
+		UV4.Plat2[3]
+    ];
+
+	
+   
 
     platform = new THREE.Mesh(geometriaPlatform, matPlatform);
     platform.position.z = 0;

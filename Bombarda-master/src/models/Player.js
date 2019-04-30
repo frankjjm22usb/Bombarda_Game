@@ -24,8 +24,8 @@ class Player {
 
             let geometry = new THREE.SphereGeometry(25, 32, 32);
             let material = new THREE.MeshPhongMaterial({
-                color: 0x3498db,
-                wireframe: false
+                wireframe: false,
+                map: THREE.ImageUtils.loadTexture('assets/textures/Prueba.png')
             });
 
             var object1 = new THREE.Mesh(geometry, material);
